@@ -35,6 +35,8 @@ function displayBooks() {
     const book = library[i];
     const card = document.createElement("div");
     card.classList.add("bookCard");
+    // adding the id to each book
+    card.dataset.id = book.id;
     card.innerHTML = `
         <h2>${book.title}</h2>
         <p>${book.author}</p>
@@ -43,8 +45,21 @@ function displayBooks() {
     libraryContainer.appendChild(card);
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "Remove";
+    removeBtn.addEventListener("click",()=>{
+        removeBook(book.id);
+    } );
     libraryContainer.appendChild(removeBtn);
   }
+}
+
+// remove book from library and display
+
+function removeBook(bookId){
+    const index = library.findIndex(book => book.id === bookId);
+    if (index !== -1){
+        library.splice(index, 1)
+    }
+    displayBooks();
 }
 
 // handleSubmit function
