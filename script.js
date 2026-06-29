@@ -2,54 +2,74 @@ const library = [];
 
 // object constructor
 function Book(title, author, pages, read) {
-        this.id = crypto.randomUUID();
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.read = read
-};
+  this.id = crypto.randomUUID();
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
 
-const book1 = new Book(
-    "Lord of the rings",
-    "Tolkien",
-    "Thousands",
-    true
-);
-const book2 = new Book(
-    "Genesis",
-    "Moses",
-    "A few hundreds",
-    true
-);
-library.push(book1);
-library.push(book2);
+// grabbing the book details
+const titleInput = document.getElementById("title");
+const authorInput = document.getElementById("author");
+const pagesInput = document.getElementById("pages");
+const readInput = document.getElementById("read");
 
-// getting the subit button 
-const submitBtn = document.getElementById("submit");
-submitBtn.addEventListener("click", addBookToLibrary)
+
+// handle all submit functions
+const form = document.getElementById("form");
+form.addEventListener("submit", handleSubmit);
 
 // add a new book to library
 function addBookToLibrary(title, author, pages, read) {
-    const book = new Book(title, author, pages, read);
-    library.push(book);
-    displayBook();
-};
+  const book = new Book(title, author, pages, read);
+  library.push(book);
+}
 
 // function for looping through the array and displays each book on the page
-function displayBook() {
-    const libraryContainer = document.getElementById("library")
-    for (let i = 0; i < library.length; i++){
-        const book = library[i];
-        const card = document.createElement("div");
-        card.classList.add("bookCard");
-        card.innerHTML = `
+function displayBooks() {
+  const libraryContainer = document.getElementById("library-container");
+  libraryContainer.textContent = "";
+
+  for (let i = 0; i < library.length; i++) {
+    const book = library[i];
+    const card = document.createElement("div");
+    card.classList.add("bookCard");
+    card.innerHTML = `
         <h2>${book.title}</h2>
         <p>${book.author}</p>
         <p>${book.pages}</p>
         <p>${book.read ? "Read" : "Not read"}</p>`;
-        libraryContainer.appendChild(card);
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "Remove";
-        libraryContainer.appendChild(removeBtn);
-    }
+    libraryContainer.appendChild(card);
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remove";
+    libraryContainer.appendChild(removeBtn);
+  }
 }
+
+// handleSubmit function
+function handleSubmit(event) {
+    // prevent defaukt form function
+    event.preventDefault();
+    // getting the values
+const title = titleInput.value;
+const author = authorInput.value;
+const pages = pagesInput.value;
+const read = readInput.checked;
+addBookToLibrary(title, author, pages, read);
+displayBooks();
+titleInput.value = "";
+authorInput.value = "";
+pagesInput.value = "";
+readInput.checked = false;
+// closing the dialog
+dialog.close()
+}
+
+// controlling the dialog 
+const dialog = document.getElementById("my-dialog");
+const openBtn = document.getElementById("newBookBtn");
+
+openBtn.addEventListener("click", ()=>{
+    dialog.showModal();
+})
