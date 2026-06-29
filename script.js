@@ -8,7 +8,10 @@ function Book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
 }
-
+// object prototype to toggle between read or not
+Book.prototype.toggleRead = function() {
+    this.read = !this.read;
+}
 // grabbing the book details
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
@@ -49,6 +52,14 @@ function displayBooks() {
         removeBook(book.id);
     } );
     libraryContainer.appendChild(removeBtn);
+    // toggle button for read
+    const toggleBtn = document.createElement("button");
+    toggleBtn.textContent = "Toggle Read";
+    toggleBtn.addEventListener("click", ()=>{
+        book.toggleRead();
+        displayBooks();
+    })
+    card.appendChild(toggleBtn)
   }
 }
 
