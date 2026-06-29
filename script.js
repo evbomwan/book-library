@@ -9,15 +9,14 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 // object prototype to toggle between read or not
-Book.prototype.toggleRead = function() {
-    this.read = !this.read;
-}
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
+};
 // grabbing the book details
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const pagesInput = document.getElementById("pages");
 const readInput = document.getElementById("read");
-
 
 // handle all submit functions
 const form = document.getElementById("form");
@@ -48,54 +47,54 @@ function displayBooks() {
     libraryContainer.appendChild(card);
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "Remove";
-    removeBtn.addEventListener("click",()=>{
-        removeBook(book.id);
-    } );
+    removeBtn.addEventListener("click", () => {
+      removeBook(book.id);
+    });
     libraryContainer.appendChild(removeBtn);
     // toggle button for read
     const toggleBtn = document.createElement("button");
     toggleBtn.textContent = "Toggle Read";
-    toggleBtn.addEventListener("click", ()=>{
-        book.toggleRead();
-        displayBooks();
-    })
-    card.appendChild(toggleBtn)
+    toggleBtn.addEventListener("click", () => {
+      book.toggleRead();
+      displayBooks();
+    });
+    card.appendChild(toggleBtn);
   }
 }
 
 // remove book from library and display
 
-function removeBook(bookId){
-    const index = library.findIndex(book => book.id === bookId);
-    if (index !== -1){
-        library.splice(index, 1)
-    }
-    displayBooks();
+function removeBook(bookId) {
+  const index = library.findIndex((book) => book.id === bookId);
+  if (index !== -1) {
+    library.splice(index, 1);
+  }
+  displayBooks();
 }
 
 // handleSubmit function
 function handleSubmit(event) {
-    // prevent defaukt form function
-    event.preventDefault();
-    // getting the values
-const title = titleInput.value;
-const author = authorInput.value;
-const pages = pagesInput.value;
-const read = readInput.checked;
-addBookToLibrary(title, author, pages, read);
-displayBooks();
-titleInput.value = "";
-authorInput.value = "";
-pagesInput.value = "";
-readInput.checked = false;
-// closing the dialog
-dialog.close()
+  // prevent defaukt form function
+  event.preventDefault();
+  // getting the values
+  const title = titleInput.value;
+  const author = authorInput.value;
+  const pages = pagesInput.value;
+  const read = readInput.checked;
+  addBookToLibrary(title, author, pages, read);
+  displayBooks();
+  titleInput.value = "";
+  authorInput.value = "";
+  pagesInput.value = "";
+  readInput.checked = false;
+  // closing the dialog
+  dialog.close();
 }
 
-// controlling the dialog 
+// controlling the dialog
 const dialog = document.getElementById("my-dialog");
 const openBtn = document.getElementById("newBookBtn");
 
-openBtn.addEventListener("click", ()=>{
-    dialog.showModal();
-})
+openBtn.addEventListener("click", () => {
+  dialog.showModal();
+});

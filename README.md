@@ -1,1 +1,2 @@
 # book-library
+this project was built using html and js. The functionality includes creating a book card, adding it to an array, being able to toggle between read and not read and also being able to remove a book from display and the library array
