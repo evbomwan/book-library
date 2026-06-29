@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Book Library</title>
+</head>
+<body>
+    
+    <main id="library">
+        <button command="show-modal" commandfor="my-dialog">New Book</button>
+        <dialog id="my-dialog">
+            <form>
+                <label for="book">Book name:</label>
+                <input type="text" name="book">
+                <label for="arthur">Arthur:</label>
+                <input type="text" name="arthur">
+                <br>
+                <label for="pages">How many pages:</label>
+                <input type="text" name="pages">
+                <label for="read">Read or not:</label>
+                <input type="text" name="read">
+                <br>
+                <input type="submit" value="Submit" id="submit">
+            </form>
+            <button commandfor="my-dialog" command="close">Close</button>
+        </dialog>
+       
+    </main>
+</body>
+</html>
